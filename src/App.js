@@ -33,14 +33,13 @@ function App() {
     //   option: { imageUrl: url, imageAlt: alt },
     // }));
 
-    setShowModal(false)
+    setShowModal(!showModal)
     setOption({ imageUrl: url, imageAlt: alt })
 
 
   };
 
   // const { searchName, showModal, option } = this.state
-  console.log(toggleModalWindow);
   return (
     <Fragment>
       <Searchbar onSubmitSearchName={onSubmitSearchName1} />
