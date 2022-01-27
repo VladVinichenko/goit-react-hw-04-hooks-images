@@ -12,8 +12,8 @@ function App() {
   const [showModal, setShowModal] = useState(false)
   const [option, setOption] = useState({})
 
-  const onSubmitSearchName1 = (val) => {
-    setSearchName(val)
+  const onSubmitSearchName = (inputData) => {
+    setSearchName(inputData)
   }
 
   const toggleModalWindow = (url, alt) => {
@@ -23,7 +23,7 @@ function App() {
 
   return (
     <Fragment>
-      <Searchbar onSubmitSearchName={onSubmitSearchName1} />
+      <Searchbar onSubmitSearchName={onSubmitSearchName} />
       <Section>
         <ImageGallery searchName={searchName1} onClickLargeImageURL={toggleModalWindow} />
       </Section>

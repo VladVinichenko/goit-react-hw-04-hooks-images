@@ -37,8 +37,8 @@ function ImageGallery({ searchName, onClickLargeImageURL }) {
           setStatus('resolved')
           scrollInto(myRef);
         })
-        .catch(er => {
-          setError(er);
+        .catch(errorRejected => {
+          setError(errorRejected);
           setStatus('rejected')
         }
         )
