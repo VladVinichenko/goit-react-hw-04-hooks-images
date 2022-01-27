@@ -8,20 +8,9 @@ import Modal from "./components/Modal/Modal";
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  // static propTypes = {
-  //   searchName: propTypes.string,
-  // }
-
   const [searchName1, setSearchName] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [option, setOption] = useState({})
-
-
-  // state = {
-  //   searchName: '',
-  //   showModal: false,
-  //   option: {},
-  // }
 
   const onSubmitSearchName1 = (val) => {
     setSearchName(val)
@@ -31,10 +20,6 @@ function App() {
     setShowModal(!showModal)
     setOption({ imageUrl: url, imageAlt: alt })
   };
-  // setSearchName(({ showModal }) => ({
-  //   showModal: !showModal,
-  //   option: { imageUrl: url, imageAlt: alt },
-  // }));
 
   return (
     <Fragment>
@@ -56,5 +41,8 @@ function App() {
   )
 }
 
+App.propTypes = {
+  searchName: propTypes.string,
+}
 
 export default App
