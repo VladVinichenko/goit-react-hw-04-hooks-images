@@ -22,25 +22,52 @@ function ImageGallery({ searchName, onClickLargeImageURL }) {
 
 
   // console.log(onClickLargeImageURL);
+  const fetch = () => {
+    setImages([])
+    setStatus('pending')
+    {
+      fetchApi(searchName, page)
+        .then(el => {
+          if (el.hits.length === 0) {
+            return Promise.reject(
+              new Error(`No results were found for this: ${searchName}`)
+            )
+          }
+          el.hits[0] = { ...el.hits[0], myRef: myRef };
+          setImages([...images, ...el.hits])
+          setStatus('resolved')
 
+          scrollInto(myRef);
+        })
+        .catch(er => {
+          setError(er);
+          setStatus('rejected')
+        }
+        )
+    }
+  }
 
-
-  useEffect(() => {
+  const fetchImages = (option) => {
     if (searchName.trim().length > 0) {
-      setImages([])
+      option === 'page' && setImages([])
       setStatus('pending')
       {
         fetchApi(searchName, page)
           .then(el => {
             if (el.hits.length === 0) {
+              setImages([])
               return Promise.reject(
                 new Error(`No results were found for this: ${searchName}`)
               )
             }
             el.hits[0] = { ...el.hits[0], myRef: myRef };
-            setImages([...images, ...el.hits])
-            setStatus('resolved')
 
+            if (option === 'page') {
+              setImages([...el.hits])
+            } else if (option === 'searchName') {
+              setImages([...images, ...el.hits])
+            }
+            setStatus('resolved')
             scrollInto(myRef);
           })
           .catch(er => {
@@ -50,7 +77,17 @@ function ImageGallery({ searchName, onClickLargeImageURL }) {
           )
       }
     }
-  }, [searchName, page])
+  }
+
+  useEffect(() => {
+    fetchImages('page')
+  }, [searchName])
+
+
+  useEffect(() => {
+    fetchImages('searchName')
+  }, [page])
+
 
 
   const scrollInto = elem => {
