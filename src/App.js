@@ -1,5 +1,5 @@
 import Section from "./components/Section/Section";
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Fragment } from "react/cjs/react.production.min";
 import propTypes from "prop-types";
 import Searchbar from "./components/Searchbar/Searchbar";
@@ -7,47 +7,58 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import Modal from "./components/Modal/Modal";
 import { ToastContainer } from "react-toastify";
 
-class App extends Component {
-  static propTypes = {
-    searchName: propTypes.string,
+function App() {
+  // static propTypes = {
+  //   searchName: propTypes.string,
+  // }
+
+  const [searchName1, setSearchName] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [option, setOption] = useState({})
+
+
+  // state = {
+  //   searchName: '',
+  //   showModal: false,
+  //   option: {},
+  // }
+
+  const onSubmitSearchName1 = (val) => {
+    setSearchName(val)
   }
 
-  state = {
-    searchName: '',
-    showModal: false,
-    option: {},
-  }
+  const toggleModalWindow = (url, alt) => {
+    // setSearchName(({ showModal }) => ({
+    //   showModal: !showModal,
+    //   option: { imageUrl: url, imageAlt: alt },
+    // }));
 
-  onSubmitSearchName = (val) => {
-    this.setState({ searchName: val })
-  }
+    setShowModal(false)
+    setOption({ imageUrl: url, imageAlt: alt })
 
-  toggleModalWindow = (url, alt) => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-      option: { imageUrl: url, imageAlt: alt },
-    }));
+
   };
 
-  render() {
-    const { searchName, showModal, option } = this.state
-    return (
-      <Fragment>
-        <Searchbar onSubmitSearchName={this.onSubmitSearchName} />
-        <Section>
-          <ImageGallery searchName={searchName} onClickLargeImageURL={this.toggleModalWindow} />
-        </Section>
-        {showModal && (
+  // const { searchName, showModal, option } = this.state
+  console.log(toggleModalWindow);
+  return (
+    <Fragment>
+      <Searchbar onSubmitSearchName={onSubmitSearchName1} />
+      <Section>
+        <ImageGallery searchName={searchName1} onClickLargeImageURL={toggleModalWindow} />
+      </Section>
+      {
+        showModal && (
           <Modal
             url={option.imageUrl}
             alt={option.imageAlt}
-            onCloseModal={this.toggleModalWindow}
+            onCloseModal={toggleModalWindow}
           />
-        )}
-        <ToastContainer autoClose={4000} />
-      </Fragment>
-    )
-  }
+        )
+      }
+      <ToastContainer autoClose={4000} />
+    </Fragment >
+  )
 }
 
 

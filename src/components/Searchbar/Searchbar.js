@@ -82,8 +82,8 @@ function Searchbar({ onSubmitSearchName }) {
 //   }
 // }
 
-Searchbar.propTypes = {
-  onSubmitSearchName: propTypes.func
-}
+// Searchbar.propTypes = {
+//   onSubmitSearchName: propTypes.func
+// }
 
 export default Searchbar
