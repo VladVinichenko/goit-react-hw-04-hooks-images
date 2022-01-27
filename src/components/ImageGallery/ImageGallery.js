@@ -16,44 +16,46 @@ function ImageGallery({ searchName, onClickLargeImageURL }) {
 
   const fetchImages = (option) => {
     if (searchName.trim().length > 0) {
-      option === 'page' && setImages([])
+      option === 'searchName' && setImages([])
       setStatus('pending')
-      {
-        fetchApi(searchName, page)
-          .then(el => {
-            if (el.hits.length === 0) {
-              setImages([])
-              return Promise.reject(
-                new Error(`No results were found for this: ${searchName}`)
-              )
-            }
-            el.hits[0] = { ...el.hits[0], myRef: myRef };
 
-            if (option === 'page') {
-              setImages([...el.hits])
-            } else if (option === 'searchName') {
-              setImages([...images, ...el.hits])
-            }
-            setStatus('resolved')
-            scrollInto(myRef);
-          })
-          .catch(er => {
-            setError(er);
-            setStatus('rejected')
+      fetchApi(searchName, page)
+        .then(el => {
+          if (el.hits.length === 0) {
+            setImages([])
+            return Promise.reject(
+              new Error(`No results were found for this: ${searchName}`)
+            )
           }
-          )
-      }
+          el.hits[0] = { ...el.hits[0], myRef: myRef };
+
+          if (option === 'searchName') {
+            setImages([...el.hits])
+          } else if (option === 'page') {
+            setImages([...images, ...el.hits])
+          }
+          setStatus('resolved')
+          scrollInto(myRef);
+        })
+        .catch(er => {
+          setError(er);
+          setStatus('rejected')
+        }
+        )
+
     }
   }
 
   useEffect(() => {
     fetchImages('page')
-  }, [searchName])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page])
 
 
   useEffect(() => {
     fetchImages('searchName')
-  }, [page])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchName])
 
 
 
