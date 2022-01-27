@@ -1,0 +1,55 @@
+.searchbar {
+  background-color: var(--background-color);
+  padding: 8px 20px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  border: none;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  height: 40px;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+}
+
+.input {
+  padding: 0px 15px;
+  font-size: 15px;
+  outline: none;
+  border: none;
+  background-color: var(--background-input);
+  color: rgb(29, 29, 29);
+  transition: all 250ms;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.input:hover,
+.input:focus {
+  background-color: var(--background-input-hover);
+  color: black;
+}
+
+.button {
+  border: none;
+  height: 100%;
+  padding: 0 8px;
+  outline: none;
+  background-color: rgb(129, 99, 204);
+
+  color: rgb(224, 224, 224);
+  font-size: 18px;
+  transition: all 250ms;
+  border-right: 1px solid rgb(107, 107, 107);
+}
+
+.button:hover {
+  background-color: rgb(71, 40, 175);
+  color: rgb(255, 255, 255);
+}

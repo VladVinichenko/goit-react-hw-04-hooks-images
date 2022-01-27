@@ -1,0 +1,21 @@
+.button {
+  border: none;
+  border-radius: var(--card-radius);
+  padding: 5px 8px;
+  outline: none;
+  background-color: var(--background-color);
+
+  color: var(--font-primary-color);
+  font-size: 18px;
+  box-shadow: var(--card-shadow);
+  transition: all 250ms;
+}
+
+.button:not(:last-child) {
+  margin-right: 20px;
+}
+
+.button:hover {
+  box-shadow: var(--card-hover-shadow);
+  background: var(--background-hover-style);
+}
